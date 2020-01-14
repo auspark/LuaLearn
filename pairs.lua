@@ -19,6 +19,7 @@ pairs
 ]]
 
 
+print('--------')
 t = {10, print, 12, 'hi'}
 for k,v in ipairs(t) do
 	print(k,v)
@@ -32,15 +33,25 @@ end
 ipairs: Lua会确保遍历是按照顺序进行的
 ]]
 
+print('--------')
 
 for i=1,#t do
 	print(i,t[i])
 end
 -- 数值型for循环，也能保证是按照循序进行的
 
-
-
-
-
-
+function foo( a,b )
+	local x
+	-- do local c = a -b end
+	local n = 1
+	local c = a - b
+	while true do
+		local name, value = debug.getlocal(1, n) -- 怎么个获取逻辑？
+		if not name then break end
+		print(name, value) -- 
+		n = n + 1
+	end
+end
+print('--------')
+foo(10, 20)
 
