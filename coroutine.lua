@@ -88,5 +88,9 @@ coroutine.resume(co,"hi") -- 只有第一个resume时，只有co1这一个输出
 coroutine.resume(co,4,5) -- 第二次执行resume时，会有co2这第二个输出co2	4	5
 
 
+-- create coroutine function 
+
+
+
 
 
