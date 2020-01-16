@@ -87,8 +87,87 @@ end)
 coroutine.resume(co,"hi") -- 只有第一个resume时，只有co1这一个输出co1	hi
 coroutine.resume(co,4,5) -- 第二次执行resume时，会有co2这第二个输出co2	4	5
 
+-- 当一个协程运行结束时，主函数所返回的值都将变成对应函数resume的返回值
+co = coroutine.create(function ()
+	return 6,7
+end)
+print(coroutine.resume(co)) -- true	6	7
 
--- create coroutine function 
+
+--
+-- 那个协程占据主循环
+-- 协程最经典案例：生产者-消费者的问题
+-- 一个函数不断地产生值，另一个函数不断地消费这些值
+function producer(  )
+	while true do
+		local x = io.read() -- generate new value
+		send(x) -- send to consumer
+	end
+end
+
+function consumer(  )
+	while true do
+		local x = receive()
+		io.write(x,"\n")
+	end
+end
+
+function receive(  )
+	local status, value = coroutine.resume(producer)
+	return value
+end
+
+function send( x )
+	coroutine.yield(x)
+end
+
+producer = coroutine.create(producer)
+
+-----------
+-- 遍历一个指定数组的所有排列
+function permgen( a,n )
+	n = n or #a
+	if n <= 1 then
+		printResult(a)
+	else
+		for i = 1, n do
+			-- 把第i个元素当做最后一个元素
+			a[n], a[i] = a[i], a[n]
+			-- 生成其余元素的所有排列
+			permgen(a, n-1)
+			-- 恢复第i个元素
+			a[n], a[i] = a[i], a[n]
+		end
+	end
+end
+
+function printResult( a )
+	for i=1,#a do
+		io.write(a[i]," ")
+	end
+	io.write('\n')
+end
+
+permgen({1,2,3,4})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
