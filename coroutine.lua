@@ -123,39 +123,6 @@ end
 
 producer = coroutine.create(producer)
 
------------
--- 遍历一个指定数组的所有排列
-function permgen( a,n )
-	n = n or #a
-	if n <= 1 then
-		printResult(a)
-	else
-		for i = 1, n do
-			-- 把第i个元素当做最后一个元素
-			a[n], a[i] = a[i], a[n]
-			-- 生成其余元素的所有排列
-			permgen(a, n-1)
-			-- 恢复第i个元素
-			a[n], a[i] = a[i], a[n]
-		end
-	end
-end
-
-function printResult( a )
-	for i=1,#a do
-		io.write(a[i]," ")
-	end
-	io.write('\n')
-end
-
-permgen({1,2,3,4})
-
-
-
-
-
-
-
 
 
 
