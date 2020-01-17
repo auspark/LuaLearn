@@ -29,9 +29,9 @@ local array = {'a',2,'d'}
 -- local array = {1,2,3,4}
 -- local array = {1,2,3,4,5}
 -- ArrangeArr(array)
-for p in permutations(array) do
+for p in permutations(array) do -- 迭代获取每一种排列, 每次迭代运行一次resume，到yield停住并返回yield的值
 	for i=1,#p do
-		io.write(p[i]," ")
+		io.write(p[i]," ") -- 排列是数组，使用循环打印出来
 	end
 	io.write("\n")
 end
