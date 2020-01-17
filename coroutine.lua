@@ -122,21 +122,3 @@ function send( x )
 end
 
 producer = coroutine.create(producer)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
